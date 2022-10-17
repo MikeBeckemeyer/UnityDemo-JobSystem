@@ -29,6 +29,16 @@ Execute method in the Job. because this is an IJobParallelFor it will act like a
 One issue I ran into with the IJobParallelFor:  The job is restricted from editing data in other NativeContainers in Execute as part of Unity's safety system on Jobs.  In order for me to write data to tileUnitCount[MapIndex] I had to add the tag [NativeDisableParallelForRestriction] to the declaration on the Job.  Because I am just taking the int at that index and adding one I think this is safe and race conditions shouldn't be an issue *fingers crossed*
 ![image](https://user-images.githubusercontent.com/107947089/196193628-6e233420-9110-430c-b094-59358f8ad101.png)
 
+Scheduling the Job by setting the job data first, done in update() and assign the main thread native container to it's job equivilent.  Afterwards schedule the job to run.  I'm running it based on the # of units, using 64 threads here.  Also assigning a job handle to the job here so we can reference it later when it's complete
+![image](https://user-images.githubusercontent.com/107947089/196194966-ec4239f8-1fbc-4cc2-a068-37f0e575adb4.png)
+
+
+Completing the job with the UnitMapTileHandle.Complete() inside of LateUpdate() so the job has the time needed to run.  Currently at the numbers I've been runnign this at (1800 map tile and ~600 units) the job appears to be completing and returning a full set of data but this might change as unit count rises.  After it is complete I'm able to use the nativeArray data in the main thread.
+![image](https://user-images.githubusercontent.com/107947089/196196525-d151c23c-a442-464d-bb2a-a604206c055a.png)
+
+dispose of the evidence when the job is completed.  this frees up the nativecontainer data.
+![image](https://user-images.githubusercontent.com/107947089/196196619-25479590-7565-43d6-a115-1feec16141f8.png)
+
 
 
 
