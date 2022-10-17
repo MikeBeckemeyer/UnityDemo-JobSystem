@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ using Unity.Mathematics;
 
 public class UnitManager : MonoBehaviour
 {
-    //Job System for map tiles
+    //Native containers for Job System.  
     public NativeList<Vector3> unitLocations; //location of units.  We want to find out which tile they are on.
     public NativeArray<int> tileUnitCount; //index of all tiles (1800 total in a 30x60 grid) and the number of units on the tile
     public NativeArray<float> mapTileSize; //Index of 1.  only sends the tile size
@@ -19,7 +19,7 @@ public class UnitManager : MonoBehaviour
 
     private void Start()
     {
-        //initial allocations of NativeContainers
+        //allocations of NativeContainers
         unitLocations = new NativeList<Vector3>(allGameplayObj.Count, Allocator.Persistent);
         tileUnitCount = new NativeArray<int>(1800, Allocator.Persistent);
         mapTileSize = new NativeArray<float>(1, Allocator.Persistent);
