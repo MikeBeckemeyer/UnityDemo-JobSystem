@@ -8,5 +8,13 @@ I'm starting with a List of Class MapTiles that have:
   standard size of 2x2.
 A List of Units that contain an X and Z coordiantes.
 
-The structure of the job itself is an IJobParallelFor.  It loops through each Unit in the game and determines which tile the unit is on using the Tile Index, this way I can return this info to the same MapTile instance after the job is finshed.   
+The structure of the job itself is an IJobParallelFor.  It loops through each Unit in the game and determines which tile the unit is on using the Tile Index, this way I can return this info to the same MapTile instance after the job is finshed.
+
+Libraries in use (mostly).  
+![image](https://user-images.githubusercontent.com/107947089/196184258-57315ea0-334d-4150-814f-2896219492b8.png)
+
+Declaration of NAtive Containers used to to pass data to the job. Be sure to install the Collections Package in Unity to allow the use of a NativeLists, I didn't have it at first and it was very helpful to have unitLocations as a list. 
+![image](https://user-images.githubusercontent.com/107947089/196184587-f3d24d58-521c-4529-a9c5-617d860d03cc.png)
+
+
 
